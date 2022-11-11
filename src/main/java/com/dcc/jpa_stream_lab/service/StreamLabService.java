@@ -82,18 +82,22 @@ public class StreamLabService {
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = sdf.parse("2015-12-31");
+        Date date1 = sdf.parse("2016-01-01");
 
         return users.findAll().stream().filter(user -> user.getRegistrationDate().before(date1)
         ).toList();
     }
 
-    public List<User> RProblemFive()
-    {
+    public List<User> RProblemFive() throws ParseException {
         // Write a query that gets all of the users who registered AFTER 2016 and BEFORE 2018
         // Return the list
 
-        return null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = sdf.parse("2018-01-01");
+        Date date2 = sdf.parse("2016-01-01");
+
+        return users.findAll().stream().filter(user -> user.getRegistrationDate().before(date1) && user.getRegistrationDate().after(date2)
+        ).toList();
     }
 
     // <><><><><><><><> R Actions (Read) with Foreign Keys <><><><><><><><><>
