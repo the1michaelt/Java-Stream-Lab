@@ -1,5 +1,7 @@
 package com.dcc.jpa_stream_lab.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.io.*;
@@ -68,24 +70,23 @@ public class StreamLabService {
     {
         // Write a query that gets each product that CONTAINS an "s" in the products name.
         // Return the list
-       return products.findAll().stream().filter(product -> {
-           return product.getName().contains("s");
-       }).toList();
+       return products.findAll().stream().filter(product -> product.getName().contains("s")
+       ).toList();
     }
 
-    public List<User> RProblemFour()
-    {
+    public List<User> RProblemFour() throws ParseException {
         // Write a query that gets all the users who registered BEFORE 2016
         // Return the list
         // Research 'java create specific date' and 'java compare dates'
         // You may need to use the helper classes imported above!
 
-        return users.findAll().stream().filter(user -> {
-            return user.getRegistrationDate().contains("s");
-        }).toList();
-    }
 
-}
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = sdf.parse("2015-12-31");
+
+        return users.findAll().stream().filter(user -> user.getRegistrationDate().before(date1)
+        ).toList();
+    }
 
     public List<User> RProblemFive()
     {
