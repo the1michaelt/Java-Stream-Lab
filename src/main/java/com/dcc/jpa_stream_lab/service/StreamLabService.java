@@ -76,13 +76,13 @@ public class StreamLabService {
     public List<User> RProblemFour()
     {
         // Write a query that gets all the users who registered BEFORE 2016
-
+        // Return the list
         // Research 'java create specific date' and 'java compare dates'
         // You may need to use the helper classes imported above!
 
         return users.findAll().stream().filter(user -> {
             return user.getRegistrationDate().contains("s");
-        }).toList();      // Return the list
+        }).toList();
     }
 
 }
