@@ -4,8 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.io.*;
-import java.util.*;
+
 
 import java.util.Calendar;
 import java.util.Date;
@@ -116,21 +115,18 @@ public class StreamLabService {
     	return customers;
     }
 
-    public <Products> List<Product> RProblemSix()
+    public <Product> List<Product> RProblemSix()
     {
         // Write a query that retrieves all of the products in the shopping cart of the user who has the email "afton@gmail.com".
         // Return the list
 
         User foundUser = users.findAll().stream().filter(u -> u.getEmail().equals("afton@gmail.com")).findFirst().orElse(null);        // gets the user as an object with the email address
-        foundUser.getId();  // gets the id within the user object
+        //foundUser.getId();  // gets the id within the user object
         // next: query the shopping cart object for where the user's id appears
         List<ShoppingcartItem> foundItems = shoppingcartitems.findAll().stream().filter(u -> u.getUser().equals(foundUser)).toList();
+        //foundItems.stream().map().getProduct();
+        return null;
 
-        // return the product ids from the shopping cart table corresponding to the user id
-        List<Product> findProducts = products.findAll().stream().filter(p -> p.getName().equals(foundItems)).toList();
-
-
-        return findProducts;
     }
 
     public long RProblemSeven()
@@ -194,7 +190,13 @@ public class StreamLabService {
         // Add the product you created to the user we created in the ShoppingCart junction table.
         // Return the ShoppingcartItem
 
-    	return null;
+        Product newProduct = new Product();
+        newProduct.setName("Alienware Laptop");
+        newProduct.setDescription("32GB RAM, 1TB SSD");
+        newProduct.setPrice(1500);
+        products.save(newProduct);
+
+        return newProduct;
     	
     }
 
