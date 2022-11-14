@@ -6,6 +6,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -33,6 +34,7 @@ public class Product implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="product")
 	private List<ShoppingcartItem> shoppingcartItems;
+	private Collection<Object> products;
 
 	public Product() {
 	}

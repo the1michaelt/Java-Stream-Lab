@@ -106,17 +106,31 @@ public class StreamLabService {
     {
         // Write a query that retrieves all of the users who are assigned to the role of Customer.
     	Role customerRole = roles.findAll().stream().filter(r -> r.getName().equals("Customer")).findFirst().orElse(null);
+  // on roles table, get name column = "customer"
     	List<User> customers = users.findAll().stream().filter(u -> u.getRoles().contains(customerRole)).toList();
+// on users table? rather user_roles, get roles = "customer" role
+
+        // instantiate customerRole-- role-- return only and all assigned to "customer"
+        // list customers-- customer -- who have the customerRole of "Customer"
 
     	return customers;
     }
 
-    public List<Product> RProblemSix()
+    public <Products> List<Product> RProblemSix()
     {
         // Write a query that retrieves all of the products in the shopping cart of the user who has the email "afton@gmail.com".
         // Return the list
 
-    	return null;
+        User foundUser = users.findAll().stream().filter(u -> u.getEmail().equals("afton@gmail.com")).findFirst().orElse(null);        // gets the user as an object with the email address
+        foundUser.getId();  // gets the id within the user object
+        // next: query the shopping cart object for where the user's id appears
+        List<ShoppingcartItem> foundItems = shoppingcartitems.findAll().stream().filter(u -> u.getUser().equals(foundUser)).toList();
+
+        // return the product ids from the shopping cart table corresponding to the user id
+        List<Product> findProducts = products.findAll().stream().filter(p -> p.getName().equals(foundItems)).toList();
+
+
+        return findProducts;
     }
 
     public long RProblemSeven()
@@ -155,9 +169,13 @@ public class StreamLabService {
     {
         // Create a new Product object and add that product to the Products table.
         // Return the product
-    	
+        Product newProduct = new Product();
+        newProduct.setName("Alienware Laptop");
+        newProduct.setDescription("32GB RAM, 1TB SSD");
+        newProduct.setPrice(1500);
+        products.save(newProduct);
 
-    	return null;
+    	return newProduct;
 
     }
 
